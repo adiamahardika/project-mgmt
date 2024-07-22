@@ -7,9 +7,19 @@ use App\Models\Project;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
+        $query = Project::query();
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        if ($request->filled('date')) {
+            $query->whereDate('created_at', $request->date);
+        }
+
+        $projects = $query->get();
         return view('projects.index', compact('projects'));
     }
 
@@ -48,6 +58,5 @@ class ProjectController extends Controller
 
     return view('projects.show', compact('project', 'progressData'));
     }
-
 }
 

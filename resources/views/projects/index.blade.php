@@ -27,6 +27,18 @@
         <div class="alert alert-success mt-3">{{ session('success') }}</div>
     @endif
 
+    <form action="{{ route('projects.index') }}" method="GET" class="mt-3">
+        <div class="form-group">
+            <label for="name">Search by Name</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Enter project name">
+        </div>
+        <div class="form-group">
+            <label for="date">Search by Date</label>
+            <input type="date" name="date" id="date" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+
     <table class="mt-3">
         <thead>
             <tr>
